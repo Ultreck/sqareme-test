@@ -18,7 +18,7 @@ const TransactionPagination = () => {
           <Button
             variant="outline"
             size="sm"
-            className="rounded-md w-8 h-8 p-0"
+            className="rounded-md text-[#1F62FF] border border-[#1F62FF] w-8 h-8 p-0"
             >
             1
           </Button>

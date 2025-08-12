@@ -8,7 +8,7 @@ import ExportFileComponent from "./ExportFileComponent";
 const TransactionHeader = () => {
   return (
     <>
-    <div className="pl-8 pr-6 space-y-3 py-6 md:border-b flex flex-col md:hidden items-center justify-between">
+    <div className="pl-8 pr-6 mt-10 space-y-3 py-6 md:border-b flex flex-col md:hidden items-center justify-between">
       <div className="text flex justify-between w-full">
        <AccountsDropdown/>
         <ExportFileComponent/>

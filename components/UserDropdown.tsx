@@ -7,7 +7,7 @@ export function UserDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center border-0 outline-0 py-2 hover:bg-accent">
+        <button className="hidden md:flex items-center border-0 outline-0 py-2 hover:bg-accent">
           <ChevronDown size={16} />
         </button>
       </DropdownMenuTrigger>

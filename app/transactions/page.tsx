@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchTransactions } from "@/redux/transactionsSlice";
@@ -11,28 +11,51 @@ import TransactionPagination from "@/components/TransactionPagination";
 
 export default function TransactionsPage() {
   const dispatch = useDispatch<AppDispatch>();
+
   const { data, loading } = useSelector(
     (state: RootState) => state.transactions
   );
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
+  const isAllSelected = data.length > 0 && selectedIds.length === data.length;
 
   useEffect(() => {
     dispatch(fetchTransactions());
   }, [dispatch]);
 
+  const toggleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedIds(data.map((t) => t.id));
+    } else {
+      setSelectedIds([]);
+    }
+  };
+
+  const toggleSelectOne = (id: number, checked: boolean) => {
+    if (checked) {
+      setSelectedIds((prev) => [...prev, id]);
+    } else {
+      setSelectedIds((prev) => prev.filter((itemId) => itemId !== id));
+    }
+  };
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 pb-10">
       <TransactionHeader />
       <h1 className="text-[20px] mx-5 md:hidden font-semibold text-gray-800">
         Transactions
       </h1>
 
       {/* Desktop Table */}
-      <div className="hidden md:block  pl-6">
+      <div className="hidden border-0 md:block  pl-6">
         <table className="w-full border-collapse text-[15px]">
           <thead className="bg-gray-50 text-[#84919A] font-medium">
             <tr>
               <th className="p-4 text-left">
-                <Checkbox />
+                <Checkbox
+                className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
+                  checked={isAllSelected}
+                  onCheckedChange={(value) => toggleSelectAll(Boolean(value))}
+                />
               </th>
               <th className="p-4 text-left">Amount</th>
               <th className="p-4 text-left">Transaction ID</th>
@@ -42,7 +65,7 @@ export default function TransactionsPage() {
               <th className="p-4 text-left">Status</th>
             </tr>
           </thead>
-          <tbody className="shadow-sm bg-white border rounded-tl-2xl rounded-bl-2xl border-gray-100">
+          <tbody className="shadow-sm bg-white rounded-tl-2xl rounded-bl-2xl">
             {loading ? (
               <tr>
                 <td colSpan={7} className="p-6 text-center text-gray-500">
@@ -50,10 +73,20 @@ export default function TransactionsPage() {
                 </td>
               </tr>
             ) : (
-              data.map((tx) => (
+              data.map((tx, i) => (
                 <tr key={tx.id} className=" hover:bg-gray-50">
-                  <td className="p-3 rounded-tl-2xl rounded-bl-2xl">
-                    <Checkbox />
+                  <td
+                    className={`p-3 ${i === 0 && "rounded-tl-2xl"} ${
+                      i === 6 && "rounded-bl-2xl"
+                    } `}
+                  >
+                    <Checkbox
+                    className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
+                      checked={selectedIds.includes(tx.id)}
+                      onCheckedChange={(value) =>
+                        toggleSelectOne(tx.id, Boolean(value))
+                      }
+                    />
                   </td>
                   <td className="p-3 border-b border-gray-200 font-medium">
                     {tx.amount}
@@ -96,9 +129,9 @@ export default function TransactionsPage() {
 
         {/* Pagination */}
       </div>
-     <div className="text">
-      <TransactionPagination/>
-     </div>
+      <div className="text">
+        <TransactionPagination />
+      </div>
 
       {/* Mobile Cards */}
       <div className="md:hidden space-y-4 px-5">

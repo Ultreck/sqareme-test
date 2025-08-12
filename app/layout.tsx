@@ -21,9 +21,9 @@ export default function RootLayout({
           <div className="text overflow-hidden w-full">
             <Navbar />
           </div>
-          <div className="flex w-full">
+          <div className="flex md:mt-20 mt-10 w-full">
             <Sidebar />
-            <main className="border w-full">{children}</main>
+            <main className="border w-full md:pl-64">{children}</main>
           </div>
         </Providers>
       </body>

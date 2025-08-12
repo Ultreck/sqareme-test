@@ -18,7 +18,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-white shadow-sm min-h-screen hidden md:block">
+    <aside className="w-64 fixed bg-white shadow-sm min-h-screen hidden md:block">
       <div className="p-6 font-bold text-lg text-[#3976E8]">
         
       </div>
