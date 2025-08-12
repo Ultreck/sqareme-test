@@ -12,7 +12,7 @@ import DateDropdown from "./DateDropdown";
 
 type Props = { data: { month: string; value: number }[] };
 const selectData = ["Weekly", "Monthly", "Quarterly", "Yearly"];
-const ticks = [100000, 200000, 300000, 400000, 500000];
+// const ticks = [100000, 200000, 300000, 400000, 500000];
 export default function RevenueChart({ data }: Props) {
   return (
     <div className="bg-white rounded-[6px] md:p-5 border border-gray-200">

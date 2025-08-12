@@ -8,6 +8,7 @@ import RevenueChart from "@/components/RevenueChart";
 import { Button } from "@/components/ui/button";
 import DateDropdown from "@/components/DateDropdown";
 const selectData = ['Last 7 days', 'Last 30 days', 'Last 3 months', 'Last 6 months', 'Last 1 year']
+
 export default function DashboardPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { data, loading } = useSelector((s: RootState) => s.revenue);
@@ -38,12 +39,12 @@ export default function DashboardPage() {
                 Showing data for: <DateDropdown data={selectData} />
               </div>
               <div className="flex gap-2">
-                {["today", "7", "30"].map((val) => (
+                {["today", "7", "30"].map((val: string) => (
                   <Button
                     key={val}
                     size="sm"
                     className={`rounded hidden md:block shadow-none  text-black ${range === val ? "bg-[#00C6FB0F] hover:bg-[#00c5fb07]" : "bg-[#d5ecf30e] hover:bg-[#00C6FB0F]"}  px-4 text-sm`}
-                    onClick={() => setRange(val as any)}
+                    onClick={() => setRange(val as "today" | "7" | "30")}
                   >
                     {val === "today"
                       ? "Today"

@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import logo from "../assets/images/Logo.png";
 import { Bell } from "lucide-react";

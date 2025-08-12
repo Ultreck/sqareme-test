@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Calendar as CalendarIcon, ChevronDown } from "lucide-react"; // you can swap icons if needed
+import { ChevronDown } from "lucide-react"; // you can swap icons if needed
 import { Calendar } from "@/components/ui/calendar";
 import {
   DropdownMenu,
