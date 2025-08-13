@@ -6,6 +6,7 @@ import { UserDropdown } from "./UserDropdown";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { usePathname } from "next/navigation";
 import { HiOutlineBars4 } from "react-icons/hi2";
+import Link from "next/link";
 export default function Navbar() {
   const pathname = usePathname();
 
@@ -22,11 +23,13 @@ export default function Navbar() {
         <HiOutlineBars4 size={26} />
       </div>
       <div
-        className={`${
+        className={` cursor-point ${
           pathname === "/dashboard" ? "flex" : "hidden md:flex"
         }  items-center gap-3`}
       >
-        <Image src={logo} width={100} height={50} alt="Brand logo" />
+        <Link href={`/`}>
+          <Image src={logo} width={100} height={50} alt="Brand logo" />
+        </Link>
       </div>
       <div
         className={`md:flex ${
