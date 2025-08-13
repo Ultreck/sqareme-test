@@ -1,4 +1,3 @@
-import * as React from "react"
 import {
   Select,
   SelectContent,
@@ -15,23 +14,24 @@ type DateSelectProps = {
   className?: string;
 };
 
-
-const DateDropdown = ({data, className}: DateSelectProps) => {
+const DateDropdown = ({ data, className }: DateSelectProps) => {
   return (
-     <Select>
+    <Select>
       <SelectTrigger className={cn("w-[180px] bg-white", className)}>
         <SelectValue placeholder={data[0]} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Date range</SelectLabel>
-          {data.map((item) => 
-          <SelectItem key={item} value={item}>{item}</SelectItem>
-          )}
+          {data.map((item) => (
+            <SelectItem key={item} value={item}>
+              {item}
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>
-  )
-}
+  );
+};
 
-export default DateDropdown
+export default DateDropdown;

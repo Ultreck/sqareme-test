@@ -9,11 +9,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import DateDropdown from "./DateDropdown";
+import { selectData } from "@/lib/helper";
+import { DateProps } from "@/types/types-file";
 
-type Props = { data: { month: string; value: number }[] };
-const selectData = ["Weekly", "Monthly", "Quarterly", "Yearly"];
-// const ticks = [100000, 200000, 300000, 400000, 500000];
-export default function RevenueChart({ data }: Props) {
+export default function RevenueChart({ data }: DateProps) {
   return (
     <div className="bg-white rounded-[6px] md:p-5 border border-gray-200">
       <div className="text-sm hidden md:grid ml-8 font-medium text-gray-700 mb-4">
@@ -27,14 +26,14 @@ export default function RevenueChart({ data }: Props) {
         </div>
       </div>
       <div className="text md:hidden px-5 flex justify-between items-center py-5">
-        <h1 className="text-[#424242] font-bold text-[28.14px] ">Revenue</h1>
+        <h1 className="text-[#424242] font-medium text-[20px] ">Revenue</h1>
         <span className="text-[#000000] font-normal">
-          <DateDropdown className="rounded-full w-28" data={selectData} />{" "}
+          <DateDropdown className="rounded-full w-28 py-2" data={selectData} />{" "}
         </span>
       </div>
       <div className="lg:hidden" style={{ height: 260 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data.slice(0, 7)} barCategoryGap={18}>
+          <BarChart data={data.slice(0, 7)} barCategoryGap={8}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="month"
@@ -61,14 +60,14 @@ export default function RevenueChart({ data }: Props) {
               dataKey="value"
               radius={[0, 0, 0, 0]}
               fill="#FFC145"
-              maxBarSize={28}
+              maxBarSize={55}
             />
           </BarChart>
         </ResponsiveContainer>
       </div>
       <div className="hidden lg:flex" style={{ height: 260 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} barCategoryGap={18}>
+          <BarChart data={data} barCategoryGap={10}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="month"

@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 import { HiOutlineBars4 } from "react-icons/hi2";
 export default function Navbar() {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <header className="w-full fixed z-30 h-[80px] bg-[#f8f8f8] border-b px-6 py-4 flex justify-between items-center">

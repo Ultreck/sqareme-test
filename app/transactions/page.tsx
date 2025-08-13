@@ -52,7 +52,7 @@ export default function TransactionsPage() {
             <tr>
               <th className="p-4 text-left">
                 <Checkbox
-                className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
+                  className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
                   checked={isAllSelected}
                   onCheckedChange={(value) => toggleSelectAll(Boolean(value))}
                 />
@@ -81,7 +81,7 @@ export default function TransactionsPage() {
                     } `}
                   >
                     <Checkbox
-                    className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
+                      className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
                       checked={selectedIds.includes(tx.id)}
                       onCheckedChange={(value) =>
                         toggleSelectOne(tx.id, Boolean(value))

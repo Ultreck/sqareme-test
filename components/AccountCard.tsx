@@ -45,11 +45,6 @@ export default function AccountCard() {
         </Button>
       </div>
       <h1 className="text md:hidden">OGEDENGBE FRUITS STORE</h1>
-      {/* {isCopied && (
-        <div className="text-green-700 bg-green-200/30 rounded-lg px-5 py-2 top-0 right-0 w-full">
-          Account number is copied
-        </div>
-      )} */}
     </div>
   );
 }

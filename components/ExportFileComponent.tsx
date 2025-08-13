@@ -8,7 +8,6 @@ import { IoMdCheckmark } from "react-icons/io";
 const ExportFileComponent = () => {
   const [files, setFiles] = useState<File[]>([]);
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Add new files to existing ones
     setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
   }, []);
 
@@ -36,7 +35,11 @@ const ExportFileComponent = () => {
             {isDragActive ? (
               <p>Drop the files here ...</p>
             ) : (
-              <p className={`flex text-xs md:text-sm items-center gap-1 ${files[0] && "hidden"}`}>
+              <p
+                className={`flex text-xs md:text-sm items-center gap-1 ${
+                  files[0] && "hidden"
+                }`}
+              >
                 <IoCloudUploadOutline /> Export
               </p>
             )}
