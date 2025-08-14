@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   description: "Admin dashboard for FundR",
 };
 
+if (typeof window !== "undefined") {
+  import("../mocks/browser").then(({ worker }) => worker.start());
+}
+
 export default function RootLayout({
   children,
 }: {

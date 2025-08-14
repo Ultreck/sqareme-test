@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import AccountCard from "./AccountCard";
@@ -8,6 +8,7 @@ import RevenueChart from "./RevenueChart";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchRevenue } from "@/redux/revenueSlice";
+import LoadingDashboard from "@/app/dashboard/loading";
 const selectData = [
   "Last 7 days",
   "Last 30 days",
@@ -33,49 +34,47 @@ const Dashboard = () => {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 gap-6  md:px-5 px-3">
-        {/* Left card */}
-        <AccountCard />
+      {loading ? (
+        <LoadingDashboard/>
+      ) : (
+        <div className="grid grid-cols-1 gap-6  md:px-5 px-3">
+          {/* Left card */}
+          <AccountCard />
 
-        {/* Right chart */}
-        <div className="md:col-span-2">
-          <div className="bg-transparent rounded-[6px] md:border border-gray-200 md:p-6">
-            <div className="flex items-center justify-between mb-5">
-              <div className="text-sm hidden md:flex items-center gap-2 text-gray-600 font-medium">
-                Showing data for: <DateDropdown data={selectData} />
+          {/* Right chart */}
+          <div className="md:col-span-2">
+            <div className="bg-transparent rounded-[6px] md:border border-gray-200 md:p-6">
+              <div className="flex items-center justify-between mb-5">
+                <div className="text-sm hidden md:flex items-center gap-2 text-gray-600 font-medium">
+                  Showing data for: <DateDropdown data={selectData} />
+                </div>
+                <div className="flex gap-2">
+                  {["today", "7", "30"].map((val: string) => (
+                    <Button
+                      key={val}
+                      size="sm"
+                      className={`rounded hidden md:block shadow-none  text-black ${
+                        range === val
+                          ? "bg-[#00C6FB0F] hover:bg-[#00c5fb07]"
+                          : "bg-[#d5ecf30e] hover:bg-[#00C6FB0F]"
+                      }  px-4 text-sm`}
+                      onClick={() => setRange(val as "today" | "7" | "30")}
+                    >
+                      {val === "today"
+                        ? "Today"
+                        : val === "7"
+                        ? "Last 7 days"
+                        : "Last 30 days"}
+                    </Button>
+                  ))}
+                </div>
               </div>
-              <div className="flex gap-2">
-                {["today", "7", "30"].map((val: string) => (
-                  <Button
-                    key={val}
-                    size="sm"
-                    className={`rounded hidden md:block shadow-none  text-black ${
-                      range === val
-                        ? "bg-[#00C6FB0F] hover:bg-[#00c5fb07]"
-                        : "bg-[#d5ecf30e] hover:bg-[#00C6FB0F]"
-                    }  px-4 text-sm`}
-                    onClick={() => setRange(val as "today" | "7" | "30")}
-                  >
-                    {val === "today"
-                      ? "Today"
-                      : val === "7"
-                      ? "Last 7 days"
-                      : "Last 30 days"}
-                  </Button>
-                ))}
-              </div>
-            </div>
 
-            {loading ? (
-              <div className="md:p-8 text-center text-gray-500 text-sm">
-                Loading chart...
-              </div>
-            ) : (
               <RevenueChart data={chartData} />
-            )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

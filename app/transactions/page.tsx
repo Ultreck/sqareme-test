@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { GoDotFill } from "react-icons/go";
 import TransactionHeader from "@/components/TransactionHeader";
 import TransactionPagination from "@/components/TransactionPagination";
+import LoadingTransactions from "./loading";
 
 export default function TransactionsPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,6 +19,7 @@ export default function TransactionsPage() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const isAllSelected = data.length > 0 && selectedIds.length === data.length;
+  console.log(data);
 
   useEffect(() => {
     dispatch(fetchTransactions());
@@ -46,34 +48,30 @@ export default function TransactionsPage() {
       </h1>
 
       {/* Desktop Table */}
-      <div className="hidden border-0 md:block  pl-6">
-        <table className="w-full border-collapse text-[15px]">
-          <thead className="bg-gray-50 text-[#84919A] font-medium">
-            <tr>
-              <th className="p-4 text-left">
-                <Checkbox
-                  className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
-                  checked={isAllSelected}
-                  onCheckedChange={(value) => toggleSelectAll(Boolean(value))}
-                />
-              </th>
-              <th className="p-4 text-left">Amount</th>
-              <th className="p-4 text-left">Transaction ID</th>
-              <th className="p-4 text-left">Transaction Type</th>
-              <th className="p-4 text-left">Date</th>
-              <th className="p-4 text-left">Time</th>
-              <th className="p-4 text-left">Status</th>
-            </tr>
-          </thead>
-          <tbody className="shadow-sm bg-white rounded-tl-2xl rounded-bl-2xl">
-            {loading ? (
+      {loading ? (
+        <LoadingTransactions />
+      ) : (
+        <div className="hidden border-0 md:block  pl-6">
+          <table className="w-full border-collapse text-[15px]">
+            <thead className="bg-gray-50 text-[#84919A] font-medium">
               <tr>
-                <td colSpan={7} className="p-6 text-center text-gray-500">
-                  Loading...
-                </td>
+                <th className="p-4 text-left">
+                  <Checkbox
+                    className="data-[state=checked]:bg-[#3976E8] data-[state=checked]:border-[#3976E8]"
+                    checked={isAllSelected}
+                    onCheckedChange={(value) => toggleSelectAll(Boolean(value))}
+                  />
+                </th>
+                <th className="p-4 text-left">Amount</th>
+                <th className="p-4 text-left">Transaction ID</th>
+                <th className="p-4 text-left">Transaction Type</th>
+                <th className="p-4 text-left">Date</th>
+                <th className="p-4 text-left">Time</th>
+                <th className="p-4 text-left">Status</th>
               </tr>
-            ) : (
-              data.map((tx, i) => (
+            </thead>
+            <tbody className="shadow-sm bg-white rounded-tl-2xl rounded-bl-2xl">
+              {data.map((tx, i) => (
                 <tr key={tx.id} className=" hover:bg-gray-50">
                   <td
                     className={`p-3 ${i === 0 && "rounded-tl-2xl"} ${
@@ -122,13 +120,13 @@ export default function TransactionsPage() {
                     </Badge>
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-        {/* Pagination */}
-      </div>
+      {/* Pagination */}
       <div className="text">
         <TransactionPagination />
       </div>

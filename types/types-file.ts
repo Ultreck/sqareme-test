@@ -43,3 +43,15 @@ export type MenuItemsProps = {
     icon: LucideIcon;
     href: string;
 }
+
+export type RevenuePoint = { month: string; value: number };
+
+export type Transaction = {
+  id: number;
+  amount: string;
+  transactionId: string;
+  type: string;
+  date: string;
+  time: string;
+  status: "Processed" | "Failed";
+};
