@@ -13,7 +13,7 @@ It is deployed on **Netlify**.
 ---
 
 ## 🚀 Features
-- **Next.js 14 (App Router)**
+- **Next.js 15 (App Router)**
 - **TypeScript**
 - **Redux Toolkit** for global state
 - **Mock API** via **MSW v2+**
@@ -53,7 +53,7 @@ It is deployed on **Netlify**.
 
 Clone the repository:
 ```bash
-git clone https://github.com/your-username/squareme-test.git
+git clone https://github.com/Ultreck/sqareme-test.git
 cd squareme-test
 npm install
 npm run dev
