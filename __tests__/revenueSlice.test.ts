@@ -27,7 +27,7 @@ describe('revenueSlice', () => {
   });
 
   it('should handle fetchRevenue.fulfilled', () => {
-    const mockRevenue = [{ id: '1', amount: 200, description: 'Test Revenue' }];
+    const mockRevenue = [ { month: "Jan", value: 250000 }];
     store.dispatch(fetchRevenue.fulfilled(mockRevenue, 'test', undefined));
     expect(store.getState().revenue.data).toEqual(mockRevenue);
     expect(store.getState().revenue.loading).toBe(false);

@@ -53,5 +53,5 @@ export type Transaction = {
   type: string;
   date: string;
   time: string;
-  status: "Processed" | "Failed";
+  status: string | "Processed" | "Failed";
 };

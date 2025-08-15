@@ -3,7 +3,7 @@ import DashboardPage from '../app/dashboard/page';
 import { Providers } from '../redux/Providers';
 
 describe('Dashboard Page', () => {
-  it('renders dashboard heading', () => {
+  it('should renders dashboard page', () => {
     render(
       <Providers >
         <DashboardPage />
