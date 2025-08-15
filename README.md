@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SquareMe Test Project
 
-## Getting Started
+This project is a **Next.js (App Router) + TypeScript** web app that implements a mock banking dashboard with pages for:
+- **Dashboard**
+- **Transactions**
+- **Transfer**
+- **Accounts**
+- **Settings**
 
-First, run the development server:
+The app uses **Redux Toolkit** for state management, **MSW v2+** for API mocking, and is fully tested with **Jest** and **React Testing Library**.  
+It is deployed on **Netlify**.
 
+---
+
+## 🚀 Features
+- **Next.js 14 (App Router)**
+- **TypeScript**
+- **Redux Toolkit** for global state
+- **Mock API** via **MSW v2+**
+- **Unit & Integration Tests** with Jest & Testing Library
+- **Responsive Design** (based on Figma designs)
+- **Deployed on Netlify**
+
+---
+
+## 📂 Project Structure
+.
+├── app/ # Next.js App Router pages
+│ ├── dashboard/
+│ ├── transactions/
+│ ├── transfer/
+│ ├── accounts/
+│ └── settings/
+├── redux/ # Redux Toolkit slices & store
+│ ├── transactionsSlice.ts
+│ ├── dashboardSlice.ts
+│ └── store.ts
+├── mocks/ # MSW v2+ mock API setup
+│ ├── handlers.ts
+│ └── server.ts
+├── tests/ # Jest test files
+│ ├── transactionsSlice.test.ts
+│ ├── transactions.test.tsx
+│ └── dashboard.test.tsx
+├── jest.setup.ts # Jest setup file
+├── jest.config.ts # Jest configuration
+├── tsconfig.json # TypeScript configuration
+└── package.json
+
+---
+
+## 🛠️ Installation
+
+Clone the repository:
 ```bash
+git clone https://github.com/your-username/squareme-test.git
+cd squareme-test
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Mock API (MSW v2+)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The mock API is powered by MSW v2+ and runs in both:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Development → intercepts fetch calls in the browser
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tests → intercepts requests in Node using setupServer
 
-## Learn More
+Example handler (mocks/handlers.ts):
 
-To learn more about Next.js, take a look at the following resources:
+import { http, HttpResponse } from "msw";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+export const handlers = [
+  http.get("/api/transactions", () => {
+    return HttpResponse.json([
+      { id: 1, description: "Coffee", amount: -3.5 },
+      { id: 2, description: "Salary", amount: 1500 }
+    ]);
+  }),
+];
+Test Stack:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Jest (test runner)
 
-## Deploy on Vercel
+React Testing Library
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Jest DOM Matchers
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MSW v2+ for mocking network requests
+
+Example test:
+
+import { render, screen } from "@testing-library/react";
+import TransactionsPage from "@/app/transactions/page";
+
+test("renders Transactions heading", () => {
+  render(<TransactionsPage />);
+  expect(screen.getByText(/transactions/i)).toBeInTheDocument();
+});
+npm run build
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "test": "jest --watchAll",
+  "test:ci": "jest --runInBand"
+}

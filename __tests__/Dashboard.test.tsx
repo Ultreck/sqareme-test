@@ -5,7 +5,7 @@ import { Providers } from '../redux/Providers';
 describe('Dashboard Page', () => {
   it('renders dashboard heading', () => {
     render(
-      <Providers>
+      <Providers >
         <DashboardPage />
       </Providers>
     );
